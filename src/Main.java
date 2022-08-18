@@ -29,22 +29,26 @@ public class Main {
             try {
                 num = Integer.parseInt(parts[0]);
                 lot = Integer.parseInt(parts[1]);
-
-
             } catch (RuntimeException a) {
                 System.out.println("Введена некорректная информация");
             }
 
-
             if (num < 0 || num > product.length) {
                 System.out.println("Нет такого товара");
                 continue;
-            } else if (lot < 0) {
-                System.out.println("Введено некорректное количество товара");
-                continue;
             }
-
-            if (num > 0 && num <= product.length) {
+            
+            int saveValue = 0;
+            if (lot == 0 || (lot < 0 && Math.abs(lot) >= quantity[num - 1])) {
+                saveValue = quantity[num - 1];
+                quantity[num - 1] = 0;
+                total -= price[num - 1] * saveValue;
+            }
+            if (lot < 0 && Math.abs(lot) < quantity[num - 1]) {
+                quantity[num - 1] += lot;
+                total += price[num - 1] * lot;
+            }
+            if (lot > 0) {
                 quantity[num - 1] += lot;
                 total += price[num - 1] * lot;
             }
