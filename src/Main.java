@@ -51,12 +51,19 @@ public class Main {
             if (num < 0 || num > allProduct.length) {
                 System.out.println("Нет такого товара");
                 continue;
-            } else if (lot < 0) {
-                System.out.println("Введено некорректное количество товара");
-                continue;
             }
-
-            if (num > 0 && num <= allProduct.length) {
+            
+            int saveValue = 0;
+            if (lot == 0 || (lot < 0 && Math.abs(lot) >= quantity[num - 1])) {
+                saveValue = quantity[num - 1];
+                quantity[num - 1] = 0;
+                total -= allPrice[num - 1] * saveValue;
+            }
+            if (lot < 0 && Math.abs(lot) < quantity[num - 1]) {
+                quantity[num - 1] += lot;
+                total += allPrice[num - 1] * lot;
+            }
+            if (lot > 0) {
                 quantity[num - 1] += lot;
                 total += allPrice[num - 1] * lot;
             }
