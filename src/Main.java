@@ -12,7 +12,7 @@ public class Main {
         int[] priceSale = {100, 5, 50};
         int[] allPrice = new int[price.length + priceSale.length];
 
-        int[] quantity = new int[3];
+        int[] quantity = new int[price.length + priceSale.length];
 
         int total = 0;
         int num = 0;
@@ -81,5 +81,9 @@ public class Main {
             }
         }
         System.out.println("Итого: " + (total - sale) + " руб");
+
+        if (sale > 0){
+            System.out.println("Скидка : " + sale);
+        }
     }
 }
